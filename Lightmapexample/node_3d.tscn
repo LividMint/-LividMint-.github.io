@@ -1,0 +1,314 @@
+[gd_scene load_steps=29 format=3 uid="uid://bodfx7t8ddkxn"]
+
+[ext_resource type="Texture2D" uid="uid://eivdt5wiadbx" path="res://Textures/Brick.png" id="1_0y5up"]
+[ext_resource type="Texture2D" uid="uid://bvrqprsbagjvq" path="res://Textures/Pipe.png" id="1_ggqsl"]
+[ext_resource type="Texture2D" uid="uid://c2npp5ubbj1hi" path="res://Textures/Sarcophagus.jpg" id="2_fc8pb"]
+[ext_resource type="LightmapGIData" uid="uid://w4caq6jnou1i" path="res://Textures/node_3d.lmbake" id="3_8njq7"]
+[ext_resource type="Texture2D" uid="uid://bnk0me1hqstr6" path="res://Textures/20231107_103501.jpg" id="4_bpwhq"]
+[ext_resource type="Texture2D" uid="uid://cm2vbhy8pjmyt" path="res://Textures/differentlensflare-sheet.png" id="4_y4vao"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmuio"]
+albedo_texture = ExtResource("1_0y5up")
+uv1_scale = Vector3(0.34, 0.34, 0.34)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_l0nox"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_fmuio")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx6y6"]
+albedo_texture = ExtResource("1_ggqsl")
+uv1_scale = Vector3(6.64, 6.64, 6.64)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6152e"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_bx6y6")
+add_uv2 = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5bmk8"]
+load_path = "res://.godot/imported/concretebetterbetter.png-0a05a4a6c1c642c06b88a3f751f771ac.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5edxg"]
+albedo_texture = SubResource("CompressedTexture2D_5bmk8")
+uv1_scale = Vector3(0.13, 0.13, 0.13)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_4mq3j"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_5edxg")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf0xd"]
+albedo_texture = ExtResource("2_fc8pb")
+rim = 0.0
+uv1_scale = Vector3(5.59, 5.59, 5.59)
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_3cy1u"]
+lightmap_size_hint = Vector2i(17, 9)
+material = SubResource("StandardMaterial3D_qf0xd")
+add_uv2 = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_badjg"]
+atlas = ExtResource("4_y4vao")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amwsr"]
+atlas = ExtResource("4_y4vao")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_as0yh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_badjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amwsr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="Animation" id="Animation_mg7nq"]
+resource_name = "LightFlicker"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.579, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_a6gtx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.579]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vg6i"]
+_data = {
+"LightFlicker": SubResource("Animation_mg7nq"),
+"RESET": SubResource("Animation_a6gtx")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ngkr"]
+albedo_texture = ExtResource("4_bpwhq")
+uv1_scale = Vector3(-0.005, -0.005, -0.005)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5y8ko"]
+lightmap_size_hint = Vector2i(17, 19)
+material = SubResource("StandardMaterial3D_1ngkr")
+add_uv2 = true
+
+[sub_resource type="Animation" id="Animation_serp3"]
+resource_name = "Lightflicker"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.331, 1.353]
+}
+
+[sub_resource type="Animation" id="Animation_chujh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.331]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hc8c1"]
+_data = {
+"Lightflicker": SubResource("Animation_serp3"),
+"RESET": SubResource("Animation_chujh")
+}
+
+[sub_resource type="Animation" id="Animation_godyy"]
+resource_name = "Lightspin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.01, 1, 0.707107, 0, 0, 0.707107, 2, 1, 1, 0, 0, -4.37114e-08)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6naji"]
+_data = {
+"Lightspin": SubResource("Animation_godyy")
+}
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("BoxMesh_l0nox")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 0, 5.47438, 0)
+mesh = SubResource("BoxMesh_6152e")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.61461e-07, -0.2, 0, 5.98153, -8.74228e-09, 0, 0, 0, 19.8091, -9.85435, 2.71909, 0.000863075)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.61461e-07, -0.2, 0, 5.98153, -8.74228e-09, 0, 0, 0, 20.3347, 9.57431, 2.71909, 0.000863075)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.14288e-14, 8.74228e-09, -19.9855, 5.98153, -8.74228e-09, 0, -2.61461e-07, -0.2, -8.73592e-07, -0.0459864, 2.71909, -9.9004)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.14288e-14, 8.74228e-09, -19.9855, 5.98153, -8.74228e-09, 0, -2.61461e-07, -0.2, -8.73592e-07, -0.0459864, -1.18588, -8.66943)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.16086e-15, 1.02238e-07, -19.9855, 0.607563, -1.02238e-07, 0, -2.65574e-08, -2.33894, -8.73593e-07, 0.0789435, 1.50619, -9.84179)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.61461e-07, 0.2, 1.74718e-06, 5.98153, -8.74227e-09, 3.10362e-21, 1.60698e-15, 1.74846e-08, -19.9855, 8.86976, -1.18588, -11.5315)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.65574e-08, 2.33893, 1.74719e-06, 0.607563, -1.02238e-07, 0, 2.32172e-15, 2.04476e-07, -19.9855, 10.0656, 1.49664, -11.5376)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.65574e-08, 2.33893, -1.74719e-06, 0.607563, -1.02238e-07, 0, -2.32172e-15, -2.04476e-07, -19.9855, 9.39244, 5.31539, -0.149609)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.16086e-15, 1.02238e-07, -19.9855, 0.607563, -1.02238e-07, 0, -2.65574e-08, -2.33893, -8.73593e-07, 6.826, 5.314, -9.708)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.14288e-14, 8.74228e-09, -19.9298, 5.98153, -8.74228e-09, 0, -2.61461e-07, -0.2, -8.71158e-07, -0.0459869, 2.71909, 10.0174)
+mesh = SubResource("BoxMesh_4mq3j")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036328, 4.42513, 0)
+quality = 2
+bounces = 5
+interior = true
+generate_probes_subdiv = 3
+light_data = ExtResource("3_8njq7")
+
+[node name="LightmapProbe" type="LightmapProbe" parent="LightmapGI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.68771, -4.1179, -8.37139)
+
+[node name="LightmapProbe2" type="LightmapProbe" parent="LightmapGI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.02219, 0.577556, -9.2557)
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54769, -2.68367, -7.1518)
+mesh = SubResource("SphereMesh_3cy1u")
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5.52217, 5.22176, -6.28213)
+light_energy = 1.579
+light_projector = ExtResource("1_0y5up")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 6.433
+omni_attenuation = 0.840898
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="OmniLight3D3"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame_progress = 0.00500165
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight3D3"]
+autoplay = "LightFlicker"
+libraries = {
+"": SubResource("AnimationLibrary_1vg6i")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.822412, 0, -0.568892, 0, 1, 0, 0.568892, 0, 0.822412, 2.27808, 2.09273, -1.82514)
+fov = 63.8
+
+[node name="Pipe" type="MeshInstance3D" parent="."]
+transform = Transform3D(-6.18272e-08, 15.0184, 0, -1.41444, -6.56474e-07, 0, 0, 0, 1.41444, 4.76837e-07, 2.62378, -9.10917)
+mesh = SubResource("CylinderMesh_5y8ko")
+
+[node name="Pipe2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-6.18272e-08, 15.0184, 0, -1.41444, -6.56474e-07, 0, 0, 0, 1.41444, 4.76837e-07, 4.14034, -9.10917)
+mesh = SubResource("CylinderMesh_5y8ko")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.42736, 3.30914, -1.40724)
+light_color = Color(0.780392, 0.141176, 0, 1)
+light_energy = 3.506
+shadow_enabled = true
+spot_range = 2.855
+spot_angle = 14.66
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+light_color = Color(0.780392, 0.141176, 0, 1)
+light_energy = 3.331
+shadow_enabled = true
+spot_range = 2.855
+spot_angle = 14.66
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpotLight3D/SpotLight3D2"]
+autoplay = "Lightflicker"
+libraries = {
+"": SubResource("AnimationLibrary_hc8c1")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpotLight3D"]
+autoplay = "Lightspin"
+libraries = {
+"": SubResource("AnimationLibrary_6naji")
+}
