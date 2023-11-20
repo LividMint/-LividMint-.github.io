@@ -1,52 +1,46 @@
-[gd_scene load_steps=29 format=3 uid="uid://bodfx7t8ddkxn"]
+[gd_scene load_steps=32 format=3 uid="uid://bodfx7t8ddkxn"]
 
-[ext_resource type="Texture2D" uid="uid://eivdt5wiadbx" path="res://Textures/Brick.png" id="1_0y5up"]
-[ext_resource type="Texture2D" uid="uid://bvrqprsbagjvq" path="res://Textures/Pipe.png" id="1_ggqsl"]
-[ext_resource type="Texture2D" uid="uid://c2npp5ubbj1hi" path="res://Textures/Sarcophagus.jpg" id="2_fc8pb"]
+[ext_resource type="Texture2D" uid="uid://vtov5xkr2w7d" path="res://Textures/FloorTile.png" id="1_bety1"]
+[ext_resource type="Texture2D" uid="uid://cd831sxuu8ply" path="res://Textures/RoofDirty.png" id="1_q5e3k"]
 [ext_resource type="LightmapGIData" uid="uid://w4caq6jnou1i" path="res://Textures/node_3d.lmbake" id="3_8njq7"]
-[ext_resource type="Texture2D" uid="uid://bnk0me1hqstr6" path="res://Textures/20231107_103501.jpg" id="4_bpwhq"]
+[ext_resource type="Texture2D" uid="uid://8s1lweoi5ku4" path="res://Textures/20231107_103501.jpg" id="4_bpwhq"]
+[ext_resource type="Texture2D" uid="uid://dyle7ob2qwunc" path="res://Textures/PipeHorizontal.png" id="4_g7y2f"]
+[ext_resource type="Texture2D" uid="uid://bqoqmdq086vbs" path="res://Textures/DirtyWall.png" id="4_isfuj"]
 [ext_resource type="Texture2D" uid="uid://cm2vbhy8pjmyt" path="res://Textures/differentlensflare-sheet.png" id="4_y4vao"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmuio"]
-albedo_texture = ExtResource("1_0y5up")
-uv1_scale = Vector3(0.34, 0.34, 0.34)
-uv1_triplanar = true
-uv1_world_triplanar = true
-texture_filter = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg5p8"]
+albedo_texture = ExtResource("1_bety1")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_texture = ExtResource("1_bety1")
+uv1_scale = Vector3(-41.66, -27.7, -21.055)
+uv1_offset = Vector3(0.005, -0.39, 0)
+texture_filter = 4
 
 [sub_resource type="BoxMesh" id="BoxMesh_l0nox"]
 lightmap_size_hint = Vector2i(14, 21)
-material = SubResource("StandardMaterial3D_fmuio")
+material = SubResource("StandardMaterial3D_pg5p8")
 add_uv2 = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx6y6"]
-albedo_texture = ExtResource("1_ggqsl")
-uv1_scale = Vector3(6.64, 6.64, 6.64)
-uv1_triplanar = true
-texture_filter = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ru5ca"]
+albedo_texture = ExtResource("1_q5e3k")
+heightmap_enabled = true
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("1_q5e3k")
+uv1_scale = Vector3(3.005, 3.005, 3.005)
+texture_filter = 4
 
 [sub_resource type="BoxMesh" id="BoxMesh_6152e"]
 lightmap_size_hint = Vector2i(14, 21)
-material = SubResource("StandardMaterial3D_bx6y6")
+material = SubResource("StandardMaterial3D_ru5ca")
 add_uv2 = true
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5bmk8"]
-load_path = "res://.godot/imported/concretebetterbetter.png-0a05a4a6c1c642c06b88a3f751f771ac.s3tc.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5edxg"]
-albedo_texture = SubResource("CompressedTexture2D_5bmk8")
-uv1_scale = Vector3(0.13, 0.13, 0.13)
-uv1_triplanar = true
-uv1_world_triplanar = true
-texture_filter = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_4mq3j"]
-lightmap_size_hint = Vector2i(14, 21)
-material = SubResource("StandardMaterial3D_5edxg")
-add_uv2 = true
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3cjgq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf0xd"]
-albedo_texture = ExtResource("2_fc8pb")
+albedo_texture = SubResource("CompressedTexture2D_3cjgq")
 rim = 0.0
 uv1_scale = Vector3(5.59, 5.59, 5.59)
 uv1_triplanar = true
@@ -116,17 +110,32 @@ _data = {
 "RESET": SubResource("Animation_a6gtx")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ngkr"]
-albedo_texture = ExtResource("4_bpwhq")
-uv1_scale = Vector3(-0.005, -0.005, -0.005)
-uv1_triplanar = true
-uv1_triplanar_sharpness = 150.0
-uv1_world_triplanar = true
-texture_filter = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7h0ub"]
+albedo_texture = ExtResource("4_g7y2f")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("4_g7y2f")
+uv1_scale = Vector3(-0.044, 3.365, 0.535)
+uv1_offset = Vector3(-0.08, 1.015, 0)
+texture_filter = 4
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5y8ko"]
 lightmap_size_hint = Vector2i(17, 19)
-material = SubResource("StandardMaterial3D_1ngkr")
+material = SubResource("StandardMaterial3D_7h0ub")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3r0qc"]
+albedo_texture = ExtResource("4_g7y2f")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("4_g7y2f")
+uv1_scale = Vector3(-0.044, 3.365, 0.535)
+uv1_offset = Vector3(-0.08, -0.685, 0)
+texture_filter = 4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rb3lk"]
+lightmap_size_hint = Vector2i(17, 19)
+material = SubResource("StandardMaterial3D_3r0qc")
 add_uv2 = true
 
 [sub_resource type="Animation" id="Animation_serp3"]
@@ -183,83 +192,63 @@ _data = {
 "Lightspin": SubResource("Animation_godyy")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyfjb"]
+albedo_texture = ExtResource("4_isfuj")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("4_isfuj")
+uv1_scale = Vector3(2.985, 0.85, 0.915)
+uv1_offset = Vector3(0.005, -0.44, 0)
+texture_filter = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_vnv2t"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_qyfjb")
+add_uv2 = true
+
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_l0nox")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 19.9565, 0, 0)
+gi_lightmap_scale = 1
 mesh = SubResource("BoxMesh_l0nox")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 0, 5.47438, 0)
+gi_lightmap_scale = 1
 mesh = SubResource("BoxMesh_6152e")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.61461e-07, -0.2, 0, 5.98153, -8.74228e-09, 0, 0, 0, 19.8091, -9.85435, 2.71909, 0.000863075)
-mesh = SubResource("BoxMesh_4mq3j")
-
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.61461e-07, -0.2, 0, 5.98153, -8.74228e-09, 0, 0, 0, 20.3347, 9.57431, 2.71909, 0.000863075)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.14288e-14, 8.74228e-09, -19.9855, 5.98153, -8.74228e-09, 0, -2.61461e-07, -0.2, -8.73592e-07, -0.0459864, 2.71909, -9.9004)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.14288e-14, 8.74228e-09, -19.9855, 5.98153, -8.74228e-09, 0, -2.61461e-07, -0.2, -8.73592e-07, -0.0459864, -1.18588, -8.66943)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.16086e-15, 1.02238e-07, -19.9855, 0.607563, -1.02238e-07, 0, -2.65574e-08, -2.33894, -8.73593e-07, 0.0789435, 1.50619, -9.84179)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.61461e-07, 0.2, 1.74718e-06, 5.98153, -8.74227e-09, 3.10362e-21, 1.60698e-15, 1.74846e-08, -19.9855, 8.86976, -1.18588, -11.5315)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.65574e-08, 2.33893, 1.74719e-06, 0.607563, -1.02238e-07, 0, 2.32172e-15, 2.04476e-07, -19.9855, 10.0656, 1.49664, -11.5376)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="MeshInstance3D13" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.65574e-08, 2.33893, -1.74719e-06, 0.607563, -1.02238e-07, 0, -2.32172e-15, -2.04476e-07, -19.9855, 9.39244, 5.31539, -0.149609)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.16086e-15, 1.02238e-07, -19.9855, 0.607563, -1.02238e-07, 0, -2.65574e-08, -2.33893, -8.73593e-07, 6.826, 5.314, -9.708)
-mesh = SubResource("BoxMesh_4mq3j")
-
-[node name="Wall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.14288e-14, 8.74228e-09, -19.9298, 5.98153, -8.74228e-09, 0, -2.61461e-07, -0.2, -8.71158e-07, -0.0459869, 2.71909, 10.0174)
-mesh = SubResource("BoxMesh_4mq3j")
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 20.0752, 5.47438, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_6152e")
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036328, 4.42513, 0)
 quality = 2
 bounces = 5
 interior = true
+environment_mode = 0
 generate_probes_subdiv = 3
 light_data = ExtResource("3_8njq7")
-
-[node name="LightmapProbe" type="LightmapProbe" parent="LightmapGI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.68771, -4.1179, -8.37139)
-
-[node name="LightmapProbe2" type="LightmapProbe" parent="LightmapGI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.02219, 0.577556, -9.2557)
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54769, -2.68367, -7.1518)
 mesh = SubResource("SphereMesh_3cy1u")
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5.52217, 5.22176, -6.28213)
+transform = Transform3D(-0.65911, 0.752047, 3.2873e-08, 0, -4.37114e-08, 1, 0.752047, 0.65911, 2.88106e-08, 5.52217, 5.22176, -6.28213)
 light_energy = 1.579
-light_projector = ExtResource("1_0y5up")
+light_projector = ExtResource("4_bpwhq")
 light_size = 0.162
 light_specular = 7.288
 shadow_enabled = true
 omni_range = 6.433
-omni_attenuation = 0.840898
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="OmniLight3D3"]
 transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
@@ -267,26 +256,38 @@ texture_filter = 4
 sprite_frames = SubResource("SpriteFrames_as0yh")
 frame_progress = 0.00500165
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight3D3"]
+[node name="LightFlicker1" type="AnimationPlayer" parent="OmniLight3D3"]
 autoplay = "LightFlicker"
 libraries = {
 "": SubResource("AnimationLibrary_1vg6i")
 }
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.822412, 0, -0.568892, 0, 1, 0, 0.568892, 0, 0.822412, 2.27808, 2.09273, -1.82514)
+transform = Transform3D(0.957776, -0.153106, -0.243358, 0.0727509, 0.947931, -0.310056, 0.278158, 0.27926, 0.919044, 6.45083, 0.778225, -1.76132)
 fov = 63.8
 
 [node name="Pipe" type="MeshInstance3D" parent="."]
-transform = Transform3D(-6.18272e-08, 15.0184, 0, -1.41444, -6.56474e-07, 0, 0, 0, 1.41444, 4.76837e-07, 2.62378, -9.10917)
+transform = Transform3D(-1.27688e-08, 5.95247, -6.63322e-16, -0.0588131, -5.23852e-08, 0.286135, 0.286135, 2.54862e-07, 0.0588131, 3.79365, 0.655683, -9.70589)
+gi_lightmap_scale = 1
 mesh = SubResource("CylinderMesh_5y8ko")
 
 [node name="Pipe2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-6.18272e-08, 15.0184, 0, -1.41444, -6.56474e-07, 0, 0, 0, 1.41444, 4.76837e-07, 4.14034, -9.10917)
+transform = Transform3D(-1.27688e-08, 5.95247, -6.63322e-16, -0.0588131, -5.23852e-08, 0.286135, 0.286135, 2.54862e-07, 0.0588131, 3.43819, 1.07525, -9.70589)
+gi_lightmap_scale = 1
 mesh = SubResource("CylinderMesh_5y8ko")
 
+[node name="Pipe3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0588131, -2.07805e-07, -0.286135, -1.0198e-08, 5.95247, -1.25073e-08, 0.286135, 2.54862e-07, 0.0588131, 9.38539, 6.87147, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_rb3lk")
+
+[node name="Pipe4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0588131, -2.07805e-07, -0.286135, -1.0198e-08, 5.95247, -1.25073e-08, 0.286135, 2.54862e-07, 0.0588131, 9.74331, 6.46032, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_rb3lk")
+
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.42736, 3.30914, -1.40724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3493, 4.73682, -4.88083)
 light_color = Color(0.780392, 0.141176, 0, 1)
 light_energy = 3.506
 shadow_enabled = true
@@ -312,3 +313,61 @@ autoplay = "Lightspin"
 libraries = {
 "": SubResource("AnimationLibrary_6naji")
 }
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 10.0113, 2.71398, -16.4736)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="Wall6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 10.016, 7.262, 3.609)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="Wall5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 10.0113, 2.71398, 6.71056)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="Wall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.70648e-09, 0, 20.1285, 0, 5.41232, 0, -0.0390397, 0, -8.79845e-07, -0.0198073, 2.71398, -9.93433)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="Wall7" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.70648e-09, 0, 20.1285, 0, 5.41232, 0, -0.0390397, 0, -8.79845e-07, 20.1503, 2.71398, -6.4339)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="Wall8" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.70648e-09, 0, 20.1285, 0, 5.41232, 0, -0.0390397, 0, -8.79845e-07, 20.1503, 2.71398, -3.3369)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="Wall3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0390397, 0, -1.75969e-06, 0, 5.41232, 0, 3.41296e-09, 0, -20.1285, -10.0338, 2.71398, -0.0177727)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="Wall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.11943e-09, 0, -20.1285, 0, 5.41232, 0, 0.0390397, 0, 2.63954e-06, -0.127144, 2.71398, 9.91656)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3493, 4.73682, -4.88083)
+light_color = Color(0.780392, 0.141176, 0, 1)
+light_energy = 3.506
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 2.855
+spot_angle = 14.66
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SpotLight3D2"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+light_color = Color(0.780392, 0.141176, 0, 1)
+light_energy = 3.331
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 2.855
+spot_angle = 14.66
