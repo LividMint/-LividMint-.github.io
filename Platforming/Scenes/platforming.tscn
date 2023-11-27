@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://cf1b5ya5k315t"]
+
+[ext_resource type="PackedScene" uid="uid://q1qvuk4rtj7g" path="res://Scenes/player.tscn" id="1_bkeyq"]
+[ext_resource type="LightmapGIData" uid="uid://bfrb5q2cq70pu" path="res://Scenes/platforming.lmbake" id="2_yv6ea"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uueny"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hiwbi"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nk5dj"]
+albedo_texture = SubResource("CompressedTexture2D_uueny")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("CompressedTexture2D_hiwbi")
+heightmap_flip_texture = true
+uv1_scale = Vector3(-42.265, -43.38, -21.055)
+uv1_offset = Vector3(0.005, -0.39, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_tw6ff"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_nk5dj")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q3j3h"]
+
+[node name="Platforming" type="Node3D"]
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+visible = false
+light_data = ExtResource("2_yv6ea")
+
+[node name="Player" parent="." instance=ExtResource("1_bkeyq")]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Floor2" type="StaticBody3D" parent="World"]
+transform = Transform3D(19.9199, 0, 0, 0, 1, 0, 0, 0, 19.8072, 0.310351, -0.852006, -2.80893)
+collision_mask = 65535
+
+[node name="Floor2" type="MeshInstance3D" parent="World/Floor2"]
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_tw6ff")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor2"]
+shape = SubResource("BoxShape3D_q3j3h")
+
+[node name="Floor3" type="StaticBody3D" parent="World"]
+transform = Transform3D(5.97596, 0, 0, 0, 0.3, 0, 0, 0, 5.94216, 20.8643, 1.39327, 4.77734)
+collision_mask = 65535
+
+[node name="Floor2" type="MeshInstance3D" parent="World/Floor3"]
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_tw6ff")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor3"]
+shape = SubResource("BoxShape3D_q3j3h")
+
+[node name="Floor4" type="StaticBody3D" parent="World"]
+transform = Transform3D(22.4616, 0, 0, 0, -1.31134e-08, 5.94216, 0, -0.3, -2.5974e-07, -0.461141, 2.51609, 7.08761)
+collision_mask = 65535
+
+[node name="Floor2" type="MeshInstance3D" parent="World/Floor4"]
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_tw6ff")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor4"]
+shape = SubResource("BoxShape3D_q3j3h")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7736, 2.01143, 4.91891)

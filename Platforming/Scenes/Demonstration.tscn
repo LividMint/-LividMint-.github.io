@@ -1,0 +1,2068 @@
+[gd_scene load_steps=100 format=3 uid="uid://bodfx7t8ddkxn"]
+
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_dwybr"]
+[ext_resource type="Texture2D" uid="uid://bqoqmdq086vbs" path="res://Textures/DirtyWall.png" id="2_hyxib"]
+[ext_resource type="PackedScene" uid="uid://q1qvuk4rtj7g" path="res://Scenes/player.tscn" id="3_f8nn4"]
+[ext_resource type="Script" path="res://Scripts/close.gd" id="4_vlv7f"]
+[ext_resource type="Texture2D" uid="uid://8s1lweoi5ku4" path="res://Textures/20231107_103501.jpg" id="4_y7rhb"]
+[ext_resource type="Texture2D" uid="uid://cm2vbhy8pjmyt" path="res://Textures/differentlensflare-sheet.png" id="5_oogtf"]
+[ext_resource type="Texture2D" uid="uid://c2npp5ubbj1hi" path="res://Textures/Sarcophagus.jpg" id="6_xr5tq"]
+[ext_resource type="Texture2D" uid="uid://dyle7ob2qwunc" path="res://Textures/PipeHorizontal.png" id="7_wfm2f"]
+[ext_resource type="Texture2D" uid="uid://biq6lll77a8y2" path="res://Textures/20231120_175600.jpg" id="8_pro43"]
+[ext_resource type="Texture2D" uid="uid://bvrqprsbagjvq" path="res://Textures/Pipe.png" id="9_31jcp"]
+[ext_resource type="Texture2D" uid="uid://cd831sxuu8ply" path="res://Textures/RoofDirty.png" id="10_egiw2"]
+[ext_resource type="LightmapGIData" uid="uid://bup3tuixvdf54" path="res://LightMaps/node_3d.lmbake" id="11_x2sp8"]
+[ext_resource type="PackedScene" uid="uid://bn7gjhqnf36pa" path="res://Scenes/GunEnemy.tscn" id="12_qjmn3"]
+[ext_resource type="LightmapGIData" uid="uid://dwwg6y58up4ca" path="res://LightMaps/DemonstrationRedLight.lmbake" id="13_m85ve"]
+[ext_resource type="PackedScene" uid="uid://diggqn68ovtd0" path="res://Scenes/meleeEnemy.tscn" id="15_e5lm8"]
+[ext_resource type="PackedScene" uid="uid://c12sy8aatfggm" path="res://Scenes/bigboienemy.tscn" id="16_iwht5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyfjb"]
+albedo_texture = ExtResource("2_hyxib")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("2_hyxib")
+uv1_scale = Vector3(2.985, 0.85, 0.915)
+uv1_offset = Vector3(0.005, -0.44, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_vnv2t"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_qyfjb")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_laprj"]
+size = Vector3(0.206282, 32.2065, 36.3008)
+
+[sub_resource type="Animation" id="Animation_88cv1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloseDoor/ClosingDoor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(41.3322, 20.0467, 1.13293)]
+}
+
+[sub_resource type="Animation" id="Animation_vq4k4"]
+resource_name = "closedoor"
+
+[sub_resource type="Animation" id="Animation_brsqg"]
+resource_name = "new_animation"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloseDoor/ClosingDoor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CloseDoor/ClosingDoor:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(41.3322, 20.0467, 1.13293), Vector3(41.3322, 12.4115, 1.13293)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5il60"]
+_data = {
+"RESET": SubResource("Animation_88cv1"),
+"closedoor": SubResource("Animation_vq4k4"),
+"new_animation": SubResource("Animation_brsqg")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fx64"]
+size = Vector3(0.743328, 1, 6.82374)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_badjg"]
+atlas = ExtResource("5_oogtf")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amwsr"]
+atlas = ExtResource("5_oogtf")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_as0yh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_badjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amwsr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="Animation" id="Animation_be71y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+
+[sub_resource type="Animation" id="Animation_ts4c4"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.520694, 1.16009, 1.36687, 1.95933),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.515, 0.578, 1.515, 0.578, 1.515, 0.578]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87cno"]
+_data = {
+"RESET": SubResource("Animation_be71y"),
+"new_animation": SubResource("Animation_ts4c4")
+}
+
+[sub_resource type="Animation" id="Animation_serp3"]
+resource_name = "Lightflicker"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.331, 1.353]
+}
+
+[sub_resource type="Animation" id="Animation_chujh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.331]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hc8c1"]
+_data = {
+"Lightflicker": SubResource("Animation_serp3"),
+"RESET": SubResource("Animation_chujh")
+}
+
+[sub_resource type="Animation" id="Animation_godyy"]
+resource_name = "Lightspin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.01, 1, 0.707107, 0, 0, 0.707107, 2, 1, 1, 0, 0, -4.37114e-08)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6naji"]
+_data = {
+"Lightspin": SubResource("Animation_godyy")
+}
+
+[sub_resource type="Animation" id="Animation_vrdb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_y3fux"]
+resource_name = "RedLightFlicker"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.422, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nqj83"]
+_data = {
+"RESET": SubResource("Animation_vrdb4"),
+"RedLightFlicker": SubResource("Animation_y3fux")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8q525"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xa1j0"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1duld"]
+albedo_texture = SubResource("CompressedTexture2D_8q525")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("CompressedTexture2D_xa1j0")
+heightmap_flip_texture = true
+uv1_scale = Vector3(-23.88, -17.055, -21.055)
+uv1_offset = Vector3(0.005, -0.39, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_nwkwx"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_1duld")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c6kux"]
+size = Vector3(20.172, 0.398552, 20.0123)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_64fkm"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ch4n7"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8qd3"]
+albedo_texture = SubResource("CompressedTexture2D_64fkm")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("CompressedTexture2D_ch4n7")
+heightmap_flip_texture = true
+uv1_scale = Vector3(-6.085, -17.99, -21.055)
+uv1_offset = Vector3(0.52, -0.11, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_wduqw"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_e8qd3")
+add_uv2 = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sr5pv"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lub7b"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5s3a4"]
+albedo_texture = SubResource("CompressedTexture2D_sr5pv")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("CompressedTexture2D_lub7b")
+heightmap_flip_texture = true
+uv1_scale = Vector3(-12.56, -8.885, -21.055)
+uv1_offset = Vector3(0.52, -0.11, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_a4yux"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_5s3a4")
+add_uv2 = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_54l1l"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pjjk0"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yubyj"]
+albedo_texture = SubResource("CompressedTexture2D_54l1l")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("CompressedTexture2D_pjjk0")
+heightmap_flip_texture = true
+uv1_scale = Vector3(-27.115, -18.32, -21.055)
+uv1_offset = Vector3(0.11, -0.315, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_h4l5o"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_yubyj")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mjlvj"]
+size = Vector3(1.00055, 0.927478, 1.00023)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7h0ub"]
+albedo_texture = ExtResource("7_wfm2f")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("7_wfm2f")
+uv1_scale = Vector3(-0.044, 3.365, 0.535)
+uv1_offset = Vector3(-0.08, 1.015, 0)
+texture_filter = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5y8ko"]
+lightmap_size_hint = Vector2i(17, 19)
+material = SubResource("StandardMaterial3D_7h0ub")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3r0qc"]
+albedo_texture = ExtResource("7_wfm2f")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("7_wfm2f")
+uv1_scale = Vector3(-0.044, 3.365, 0.535)
+uv1_offset = Vector3(-0.08, -0.685, 0)
+texture_filter = 4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rb3lk"]
+lightmap_size_hint = Vector2i(17, 19)
+material = SubResource("StandardMaterial3D_3r0qc")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t77pk"]
+size = Vector3(20.4158, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06fyh"]
+albedo_texture = ExtResource("8_pro43")
+heightmap_enabled = true
+heightmap_scale = 2.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("8_pro43")
+uv1_scale = Vector3(0.07, 1.015, 1)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_hfrox"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_06fyh")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6ti6"]
+albedo_texture = ExtResource("8_pro43")
+heightmap_enabled = true
+heightmap_scale = 2.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("8_pro43")
+uv1_scale = Vector3(0.07, 1.015, 1)
+uv1_offset = Vector3(-0.855, 0, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_7p1x7"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_j6ti6")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l31t8"]
+albedo_texture = ExtResource("8_pro43")
+heightmap_enabled = true
+heightmap_scale = 2.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("8_pro43")
+uv1_scale = Vector3(0.07, 1.015, 1)
+uv1_offset = Vector3(-1.875, -1.58, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_fvga8"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_l31t8")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_doycc"]
+size = Vector3(0.206282, 5.33847, 20.1134)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b1nw8"]
+emission_shape = 3
+emission_box_extents = Vector3(4, 2, 4)
+spread = 180.0
+gravity = Vector3(0, -0.05, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.1
+scale_min = 0.03
+scale_max = 0.05
+turbulence_noise_strength = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcrsk"]
+transparency = 1
+blend_mode = 1
+shading_mode = 2
+albedo_texture = ExtResource("9_31jcp")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_okbpn"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_jcrsk")
+add_uv2 = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p2l2e"]
+direction = Vector3(0, -100, 0)
+spread = 32.13
+gravity = Vector3(0, -0.05, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.1
+scale_min = 0.02
+scale_max = 0.03
+turbulence_noise_strength = 0.01
+turbulence_noise_scale = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vl5o"]
+size = Vector3(0.206282, 5.33847, 25.7033)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ru5ca"]
+albedo_color = Color(1.5, 1.5, 1.5, 1)
+albedo_texture = ExtResource("10_egiw2")
+heightmap_enabled = true
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("10_egiw2")
+uv1_scale = Vector3(1.91, -0.955, 3.005)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6152e"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_ru5ca")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a78wc"]
+size = Vector3(56.0741, 0.395923, 49.4458)
+
+[sub_resource type="Animation" id="Animation_qv0hk"]
+resource_name = "Lightchange"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_data")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("11_x2sp8"), ExtResource("13_m85ve")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight3:light_color")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight4:light_color")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight5:light_color")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight6:light_color")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight7:light_color")
+tracks/5/interp = 0
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight8:light_color")
+tracks/6/interp = 0
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight9:light_color")
+tracks/7/interp = 0
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight10:light_color")
+tracks/8/interp = 0
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.780392, 0.141176, 0, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight3:light_energy")
+tracks/9/interp = 0
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight4:light_energy")
+tracks/10/interp = 0
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight5:light_energy")
+tracks/11/interp = 0
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight6:light_energy")
+tracks/12/interp = 0
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight7:light_energy")
+tracks/13/interp = 0
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight8:light_energy")
+tracks/14/interp = 0
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight9:light_energy")
+tracks/15/interp = 0
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight10:light_energy")
+tracks/16/interp = 0
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.515, 6.0]
+}
+
+[sub_resource type="Animation" id="Animation_tma8v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_data")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_x2sp8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight3:light_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight4:light_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight5:light_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight6:light_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight7:light_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight8:light_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight9:light_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight10:light_color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight3:light_energy")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight4:light_energy")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight5:light_energy")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight6:light_energy")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight7:light_energy")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight8:light_energy")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight9:light_energy")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../NavigationRegion3D/CombatRoom/Combatlights/MainLight10:light_energy")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.515]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sl3u0"]
+_data = {
+"Lightchange": SubResource("Animation_qv0hk"),
+"RESET": SubResource("Animation_tma8v")
+}
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_24syo"]
+vertices = PackedVector3Array(42.6581, -1.64661, -20.6011, 46.1581, -1.64661, -20.6011, 46.9081, -1.64661, -21.8511, 46.9081, -1.64661, -21.8511, 51.4081, -1.64661, -21.8511, 51.4081, -1.64661, -24.8511, 51.4081, -1.64661, -24.8511, 52.6581, -1.64661, -25.6011, 52.6581, -1.64661, -32.3511, 42.6581, -1.64661, -20.6011, 46.9081, -1.64661, -21.8511, 51.4081, -1.64661, -24.8511, 52.6581, -1.64661, -32.3511, 42.6581, -1.64661, -32.3511, 52.1581, 26.6034, -25.6011, 53.6581, 26.6034, -25.6011, 53.4081, 26.6034, -32.3511, 51.4081, 26.6034, -24.8511, 52.1581, 26.6034, -25.6011, 53.4081, 26.6034, -32.3511, 42.6581, 26.6034, -32.3511, 42.6581, 26.6034, -23.6011, 42.6581, 26.6034, -23.6011, 51.4081, 26.6034, -23.3511, 51.4081, 26.6034, -24.8511, 53.9081, -1.64661, -24.8511, 53.9081, -1.64661, -23.1011, 59.6581, -1.64661, -23.1011, 59.6581, -1.64661, -24.8511, 52.6581, -1.64661, -25.6011, 53.9081, -1.64661, -24.8511, 59.6581, -1.64661, -24.8511, 60.9081, -1.64661, -25.6011, 60.9081, -1.64661, -32.3511, 52.6581, -1.64661, -32.3511, 53.6581, 26.6034, -25.6011, 59.9081, 26.6034, -25.6011, 60.1581, 26.6034, -32.3511, 53.4081, 26.6034, -32.3511, 60.1581, 26.6034, -32.3511, 59.9081, 26.6034, -25.6011, 61.4081, 26.6034, -25.6011, 60.1581, 26.6034, -32.3511, 61.4081, 26.6034, -25.6011, 62.1581, 26.6034, -24.8511, 70.4081, 26.6034, -23.6011, 70.4081, 26.6034, -32.3511, 62.1581, 26.6034, -24.8511, 62.1581, 26.6034, -23.3511, 70.4081, 26.6034, -23.6011, 66.6581, -1.64661, -21.6011, 67.4081, -1.64661, -20.3511, 70.4081, -1.64661, -20.3511, 62.1581, -1.64661, -24.8511, 62.1581, -1.64661, -21.6011, 66.6581, -1.64661, -21.6011, 60.9081, -1.64661, -32.3511, 60.9081, -1.64661, -25.6011, 62.1581, -1.64661, -24.8511, 62.1581, -1.64661, -24.8511, 66.6581, -1.64661, -21.6011, 70.4081, -1.64661, -20.3511, 70.4081, -1.64661, -32.3511, 60.9081, -1.64661, -32.3511, 42.6581, 26.6034, -17.3511, 51.4081, 26.6034, -17.6011, 51.4081, 26.6034, -23.3511, 42.6581, 26.6034, -23.6011, 62.1581, 26.6034, -23.3511, 62.1581, 26.6034, -17.6011, 70.4081, 26.6034, -17.3511, 70.4081, 26.6034, -23.6011, 59.6581, -1.64661, -16.6011, 59.6581, -1.64661, -23.1011, 53.9081, -1.64661, -23.1011, 53.9081, -1.64661, -16.6011, 59.6581, -1.64661, -3.35112, 59.6581, -1.64661, -9.85112, 53.9081, -1.64661, -9.85112, 53.9081, -1.64661, -3.35112, 53.9081, -1.64661, 3.39888, 59.6581, -1.64661, 3.39888, 59.6581, -1.64661, -3.35112, 53.9081, -1.64661, -3.35112, 53.9081, -1.64661, -16.6011, 53.9081, -1.64661, -9.85112, 59.6581, -1.64661, -9.85112, 59.6581, -1.64661, -16.6011, 53.9081, 26.6034, -23.1011, 53.9081, 26.6034, -17.8511, 59.6581, 26.6034, -17.8511, 59.6581, 26.6034, -23.1011, 46.9081, -1.64661, -19.3511, 46.1581, -1.64661, -20.6011, 42.6581, -1.64661, -20.6011, 42.6581, -1.64661, -10.8511, 47.1581, -1.64661, -10.8511, 47.1581, -1.64661, -10.8511, 47.9081, -1.64661, -9.60112, 51.4081, -1.64661, -9.60112, 51.4081, -1.64661, -19.3511, 46.9081, -1.64661, -19.3511, 70.4081, -1.64661, -20.3511, 67.4081, -1.64661, -20.3511, 66.6581, -1.64661, -19.1011, 66.4081, -1.64661, -11.1011, 70.4081, -1.64661, -11.1011, 62.1581, -1.64661, -9.85112, 65.6581, -1.64661, -9.85112, 66.4081, -1.64661, -11.1011, 66.6581, -1.64661, -19.1011, 62.1581, -1.64661, -19.1011, 42.6581, 26.6034, -2.35112, 51.4081, 26.6034, -2.10112, 51.4081, 26.6034, -3.60112, 51.4081, 26.6034, -16.1011, 51.4081, 26.6034, -17.6011, 42.6581, 26.6034, -17.3511, 42.6581, 26.6034, -2.35112, 51.4081, 26.6034, -3.60112, 52.1581, 26.6034, -4.35112, 42.6581, 26.6034, -9.85112, 52.1581, 26.6034, -15.3511, 51.4081, 26.6034, -16.1011, 42.6581, 26.6034, -17.3511, 42.6581, 26.6034, -9.85112, 52.1581, 26.6034, -15.3511, 42.6581, 26.6034, -9.85112, 52.1581, 26.6034, -4.35112, 54.1581, 26.6034, -4.35112, 54.1581, 26.6034, -15.3511, 62.1581, 26.6034, -3.60112, 62.1581, 26.6034, -2.10112, 70.4081, 26.6034, -2.35112, 70.4081, 26.6034, -17.3511, 62.1581, 26.6034, -17.6011, 62.1581, 26.6034, -16.1011, 61.4081, 26.6034, -4.35112, 62.1581, 26.6034, -3.60112, 70.4081, 26.6034, -2.35112, 70.4081, 26.6034, -9.85112, 70.4081, 26.6034, -17.3511, 62.1581, 26.6034, -16.1011, 61.4081, 26.6034, -15.3511, 70.4081, 26.6034, -9.85112, 61.4081, 26.6034, -4.35112, 70.4081, 26.6034, -9.85112, 61.4081, 26.6034, -15.3511, 59.4081, 26.6034, -15.3511, 59.4081, 26.6034, -4.35112, 54.1581, 26.6034, -4.35112, 59.4081, 26.6034, -4.35112, 59.4081, 26.6034, -15.3511, 54.1581, 26.6034, -15.3511, 66.6581, -1.64661, 0.14888, 67.4081, -1.64661, 1.39888, 70.4081, -1.64661, 1.39888, 70.4081, -1.64661, -8.60112, 66.4081, -1.64661, -8.60112, 66.4081, -1.64661, -8.60112, 65.6581, -1.64661, -9.85112, 62.1581, -1.64661, -9.85112, 62.1581, -1.64661, 0.14888, 66.6581, -1.64661, 0.14888, 42.6581, -1.64661, 0.89888, 46.1581, -1.64661, 0.89888, 46.9081, -1.64661, -0.35112, 47.1581, -1.64661, -8.35112, 42.6581, -1.64661, -8.35112, 51.4081, -1.64661, -9.60112, 47.9081, -1.64661, -9.60112, 47.1581, -1.64661, -8.35112, 46.9081, -1.64661, -0.35112, 51.4081, -1.64661, -0.35112, 42.6581, 26.6034, 3.89888, 51.4081, 26.6034, 3.64888, 51.4081, 26.6034, -2.10112, 42.6581, 26.6034, -2.35112, 62.1581, 26.6034, -2.10112, 62.1581, 26.6034, 3.64888, 70.4081, 26.6034, 3.89888, 70.4081, 26.6034, -2.35112, 53.9081, 26.6034, -1.85112, 53.9081, 26.6034, 3.39888, 59.6581, 26.6034, 3.39888, 59.6581, 26.6034, -1.85112, 46.9081, -1.64661, 2.14888, 46.1581, -1.64661, 0.89888, 42.6581, -1.64661, 0.89888, 42.6581, -1.64661, 5.89888, 51.4081, -1.64661, 5.14888, 51.4081, -1.64661, 2.14888, 46.9081, -1.64661, 2.14888, 51.4081, -1.64661, 5.14888, 46.9081, -1.64661, 2.14888, 42.6581, -1.64661, 5.89888, 41.9081, -1.64661, 11.8989, 52.6581, -1.64661, 11.8989, 42.6581, -1.64661, 5.89888, 41.9081, -1.64661, 6.39888, 41.9081, -1.64661, 11.8989, 52.6581, -1.64661, 11.8989, 52.6581, -1.64661, 5.89888, 51.4081, -1.64661, 5.14888, 70.4081, -1.64661, 1.39888, 67.4081, -1.64661, 1.39888, 66.6581, -1.64661, 2.39888, 66.6581, -1.64661, 2.39888, 62.1581, -1.64661, 2.39888, 62.1581, -1.64661, 5.14888, 62.1581, -1.64661, 5.14888, 60.9081, -1.64661, 5.89888, 60.9081, -1.64661, 11.8989, 70.4081, -1.64661, 1.39888, 66.6581, -1.64661, 2.39888, 62.1581, -1.64661, 5.14888, 60.9081, -1.64661, 11.8989, 70.4081, -1.64661, 11.8989, 59.6581, -1.64661, 5.14888, 59.6581, -1.64661, 3.39888, 53.9081, -1.64661, 3.39888, 53.9081, -1.64661, 5.14888, 59.6581, -1.64661, 5.14888, 53.9081, -1.64661, 5.14888, 52.6581, -1.64661, 5.89888, 52.6581, -1.64661, 11.8989, 60.9081, -1.64661, 11.8989, 60.9081, -1.64661, 5.89888, 41.9081, 26.6034, 6.64888, 40.9081, 26.6034, 6.64888, 40.9081, 26.6034, 11.8989, 42.6581, 26.6034, 5.89888, 41.9081, 26.6034, 6.64888, 40.9081, 26.6034, 11.8989, 47.4081, 26.6034, 11.8989, 54.1581, 26.6034, 11.8989, 54.1581, 26.6034, 5.89888, 52.1581, 26.6034, 5.89888, 54.1581, 26.6034, 11.8989, 52.1581, 26.6034, 5.89888, 51.4081, 26.6034, 5.14888, 47.4081, 26.6034, 11.8989, 42.6581, 26.6034, 5.89888, 47.4081, 26.6034, 11.8989, 51.4081, 26.6034, 5.14888, 51.4081, 26.6034, 3.64888, 42.6581, 26.6034, 3.89888, 61.4081, 26.6034, 5.89888, 59.4081, 26.6034, 5.89888, 59.4081, 26.6034, 11.8989, 62.1581, 26.6034, 5.14888, 61.4081, 26.6034, 5.89888, 59.4081, 26.6034, 11.8989, 70.4081, 26.6034, 11.8989, 70.4081, 26.6034, 3.89888, 70.4081, 26.6034, 3.89888, 62.1581, 26.6034, 3.64888, 62.1581, 26.6034, 5.14888, 54.1581, 26.6034, 11.8989, 59.4081, 26.6034, 11.8989, 59.4081, 26.6034, 5.89888, 54.1581, 26.6034, 5.89888, 63.4081, 26.6034, 15.3989, 71.1581, 26.6034, 15.3989, 70.4081, 26.6034, 14.3989, 62.9081, 26.6034, 14.3989, 48.1581, 26.6034, 14.3989, 40.9081, 26.6034, 14.3989, 40.9081, 26.6034, 15.3989, 48.4081, 26.6034, 15.3989, 55.9081, 26.6034, 15.3989, 63.4081, 26.6034, 15.3989, 62.9081, 26.6034, 14.3989, 55.6581, 26.6034, 14.3989, 48.4081, 26.6034, 15.3989, 55.9081, 26.6034, 15.3989, 55.6581, 26.6034, 14.3989, 48.1581, 26.6034, 14.3989)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(12, 9, 13), PackedInt32Array(16, 15, 14), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 20), PackedInt32Array(20, 17, 21), PackedInt32Array(24, 23, 22), PackedInt32Array(28, 27, 25), PackedInt32Array(25, 27, 26), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 32), PackedInt32Array(32, 29, 34), PackedInt32Array(32, 34, 33), PackedInt32Array(35, 38, 36), PackedInt32Array(36, 38, 37), PackedInt32Array(41, 40, 39), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 46), PackedInt32Array(44, 46, 45), PackedInt32Array(49, 48, 47), PackedInt32Array(52, 51, 50), PackedInt32Array(55, 54, 53), PackedInt32Array(56, 58, 57), PackedInt32Array(60, 59, 61), PackedInt32Array(61, 59, 63), PackedInt32Array(61, 63, 62), PackedInt32Array(65, 64, 66), PackedInt32Array(66, 64, 67), PackedInt32Array(68, 71, 69), PackedInt32Array(69, 71, 70), PackedInt32Array(75, 74, 72), PackedInt32Array(72, 74, 73), PackedInt32Array(79, 78, 76), PackedInt32Array(76, 78, 77), PackedInt32Array(83, 82, 80), PackedInt32Array(80, 82, 81), PackedInt32Array(87, 86, 84), PackedInt32Array(84, 86, 85), PackedInt32Array(91, 90, 88), PackedInt32Array(88, 90, 89), PackedInt32Array(93, 92, 94), PackedInt32Array(94, 92, 96), PackedInt32Array(94, 96, 95), PackedInt32Array(98, 97, 99), PackedInt32Array(99, 97, 101), PackedInt32Array(99, 101, 100), PackedInt32Array(103, 102, 104), PackedInt32Array(104, 102, 105), PackedInt32Array(105, 102, 106), PackedInt32Array(108, 107, 109), PackedInt32Array(109, 107, 110), PackedInt32Array(110, 107, 111), PackedInt32Array(114, 113, 112), PackedInt32Array(117, 116, 115), PackedInt32Array(119, 118, 120), PackedInt32Array(120, 118, 121), PackedInt32Array(123, 122, 124), PackedInt32Array(124, 122, 125), PackedInt32Array(130, 129, 126), PackedInt32Array(126, 129, 128), PackedInt32Array(126, 128, 127), PackedInt32Array(133, 132, 131), PackedInt32Array(136, 135, 134), PackedInt32Array(138, 137, 139), PackedInt32Array(139, 137, 140), PackedInt32Array(142, 141, 143), PackedInt32Array(143, 141, 144), PackedInt32Array(149, 148, 145), PackedInt32Array(145, 148, 147), PackedInt32Array(145, 147, 146), PackedInt32Array(153, 152, 150), PackedInt32Array(150, 152, 151), PackedInt32Array(155, 154, 156), PackedInt32Array(156, 154, 157), PackedInt32Array(157, 154, 158), PackedInt32Array(160, 159, 161), PackedInt32Array(161, 159, 163), PackedInt32Array(161, 163, 162), PackedInt32Array(165, 164, 166), PackedInt32Array(166, 164, 167), PackedInt32Array(167, 164, 168), PackedInt32Array(170, 169, 171), PackedInt32Array(171, 169, 172), PackedInt32Array(172, 169, 173), PackedInt32Array(175, 174, 176), PackedInt32Array(176, 174, 177), PackedInt32Array(178, 181, 179), PackedInt32Array(179, 181, 180), PackedInt32Array(185, 184, 182), PackedInt32Array(182, 184, 183), PackedInt32Array(187, 186, 188), PackedInt32Array(188, 186, 189), PackedInt32Array(192, 191, 190), PackedInt32Array(194, 193, 195), PackedInt32Array(195, 193, 196), PackedInt32Array(196, 193, 197), PackedInt32Array(198, 200, 199), PackedInt32Array(203, 202, 201), PackedInt32Array(206, 205, 204), PackedInt32Array(209, 208, 207), PackedInt32Array(212, 211, 210), PackedInt32Array(214, 213, 215), PackedInt32Array(215, 213, 216), PackedInt32Array(216, 213, 217), PackedInt32Array(221, 220, 218), PackedInt32Array(218, 220, 219), PackedInt32Array(222, 227, 223), PackedInt32Array(223, 227, 224), PackedInt32Array(224, 227, 226), PackedInt32Array(224, 226, 225), PackedInt32Array(230, 229, 228), PackedInt32Array(232, 231, 233), PackedInt32Array(233, 231, 234), PackedInt32Array(237, 236, 235), PackedInt32Array(239, 238, 240), PackedInt32Array(240, 238, 241), PackedInt32Array(244, 243, 245), PackedInt32Array(245, 243, 242), PackedInt32Array(245, 242, 246), PackedInt32Array(249, 248, 247), PackedInt32Array(251, 250, 252), PackedInt32Array(252, 250, 253), PackedInt32Array(253, 250, 254), PackedInt32Array(257, 256, 255), PackedInt32Array(261, 260, 258), PackedInt32Array(258, 260, 259), PackedInt32Array(265, 264, 262), PackedInt32Array(262, 264, 263), PackedInt32Array(267, 266, 268), PackedInt32Array(268, 266, 269), PackedInt32Array(273, 272, 270), PackedInt32Array(270, 272, 271), PackedInt32Array(277, 276, 274), PackedInt32Array(274, 276, 275)]
+agent_height = 2.0
+agent_radius = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v6eh7"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3mtey"]
+load_path = "res://.godot/imported/FloorTile.png-d2751ee788851c282bd226c47ab81f9b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kngyu"]
+albedo_texture = SubResource("CompressedTexture2D_v6eh7")
+heightmap_enabled = true
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("CompressedTexture2D_3mtey")
+heightmap_flip_texture = true
+uv1_scale = Vector3(-42.265, -43.38, -21.055)
+uv1_offset = Vector3(0.005, -0.39, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_tcmkg"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_kngyu")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qva6q"]
+size = Vector3(0.206282, 5.33847, 11.7402)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvchf"]
+size = Vector3(0.206282, 5.33847, 20.1134)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jt8cq"]
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("2_hyxib")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("2_hyxib")
+uv1_scale = Vector3(2.985, 0.85, 0.915)
+uv1_offset = Vector3(0.005, -0.44, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_b7t7o"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_jt8cq")
+add_uv2 = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g5xn2"]
+load_path = "res://.godot/imported/DirtyWall.png-6021c22d999c1e2b05ad6d1933b37a99.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_63xm3"]
+load_path = "res://.godot/imported/DirtyWall.png-6021c22d999c1e2b05ad6d1933b37a99.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06t67"]
+albedo_texture = SubResource("CompressedTexture2D_g5xn2")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = SubResource("CompressedTexture2D_63xm3")
+uv1_scale = Vector3(2.985, 0.85, 0.915)
+uv1_offset = Vector3(0.005, -0.44, 0)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_bmo8r"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_06t67")
+add_uv2 = true
+
+[sub_resource type="Animation" id="Animation_vw24n"]
+resource_name = "EnemyOpenDoor"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wall16:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.97728, 11.5287, 3.16975), Vector3(0.97728, 20.1588, 3.16975)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wall15:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.97728, 11.5287, 10.8688), Vector3(0.97728, 20.1588, 10.8688)]
+}
+
+[sub_resource type="Animation" id="Animation_6offk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wall16:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.97728, 11.5287, 3.16975)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wall15:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.97728, 11.5287, 10.8688)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbu4m"]
+_data = {
+"EnemyOpenDoor": SubResource("Animation_vw24n"),
+"RESET": SubResource("Animation_6offk")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wtqpm"]
+emission_shape = 3
+emission_box_extents = Vector3(6, 20, 10)
+spread = 180.0
+gravity = Vector3(0, -0.05, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.1
+scale_min = 0.03
+scale_max = 0.05
+turbulence_noise_strength = 0.6
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lbdlt"]
+load_path = "res://.godot/imported/Pipe.png-475804fc9695294ddb74ee627261566a.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgmij"]
+transparency = 1
+blend_mode = 1
+shading_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_lbdlt")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ntwc7"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_rgmij")
+add_uv2 = true
+
+[node name="Demonstration" type="Node3D"]
+script = ExtResource("1_dwybr")
+
+[node name="Player" parent="." instance=ExtResource("3_f8nn4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.244931, 1.43398, -1.97946)
+
+[node name="CloseDoor" type="Node3D" parent="."]
+
+[node name="ClosingDoor" type="StaticBody3D" parent="CloseDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.3322, 20.0467, 1.13293)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="CloseDoor/ClosingDoor"]
+transform = Transform3D(0.200109, 0, 0, 0, 31.6105, 0, 0, 0, 26.212, 0, -0.314056, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CloseDoor/ClosingDoor"]
+shape = SubResource("BoxShape3D_laprj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CloseDoor/ClosingDoor"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_5il60")
+}
+
+[node name="Area3D" type="Area3D" parent="CloseDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.9585, 0, 9.31395)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("4_vlv7f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CloseDoor/Area3D"]
+shape = SubResource("BoxShape3D_2fx64")
+
+[node name="Timer" type="Timer" parent="CloseDoor"]
+wait_time = 5.0
+
+[node name="StartRoom" type="Node3D" parent="."]
+
+[node name="Lights" type="Node3D" parent="StartRoom"]
+
+[node name="MainLight" type="OmniLight3D" parent="StartRoom/Lights"]
+transform = Transform3D(-0.65911, 0.752047, 3.2873e-08, 0, -4.37114e-08, 1, 0.752047, 0.65911, 2.88106e-08, 0.0114821, 4.26917, 0.00316381)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 12.599
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StartRoom/Lights/MainLight"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartRoom/Lights/MainLight"]
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_87cno")
+}
+
+[node name="RedWarningLight" type="SpotLight3D" parent="StartRoom/Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10.3493, 3.66712, -4.88083)
+light_color = Color(0.780392, 0.141176, 0, 1)
+light_energy = 3.506
+shadow_enabled = true
+spot_range = 2.855
+spot_angle = 14.66
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="StartRoom/Lights/RedWarningLight"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+light_color = Color(0.780392, 0.141176, 0, 1)
+light_energy = 3.331
+shadow_enabled = true
+spot_range = 2.855
+spot_angle = 14.66
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartRoom/Lights/RedWarningLight/SpotLight3D2"]
+autoplay = "Lightflicker"
+libraries = {
+"": SubResource("AnimationLibrary_hc8c1")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartRoom/Lights/RedWarningLight"]
+autoplay = "Lightspin"
+libraries = {
+"": SubResource("AnimationLibrary_6naji")
+}
+
+[node name="RedWarningOmni" type="OmniLight3D" parent="StartRoom/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3457, 3.72376, -4.8878)
+light_color = Color(0.780392, 0.141176, 0, 1)
+light_projector = ExtResource("6_xr5tq")
+light_size = 0.3
+light_specular = 7.0
+shadow_enabled = true
+shadow_blur = 0.192
+omni_range = 1.824
+omni_attenuation = 1.86607
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartRoom/Lights/RedWarningOmni"]
+autoplay = "RedLightFlicker"
+libraries = {
+"": SubResource("AnimationLibrary_nqj83")
+}
+
+[node name="Floors" type="Node3D" parent="StartRoom"]
+
+[node name="Floor2" type="StaticBody3D" parent="StartRoom/Floors"]
+collision_mask = 65535
+
+[node name="Floor" type="MeshInstance3D" parent="StartRoom/Floors/Floor2"]
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_nwkwx")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Floors/Floor2"]
+shape = SubResource("BoxShape3D_c6kux")
+
+[node name="Floor3" type="StaticBody3D" parent="StartRoom/Floors"]
+transform = Transform3D(0.23451, 0, 0, 0, 1, 0, 0, 0, 1, 32.3, 0, 3.29361)
+collision_mask = 65535
+
+[node name="Floor" type="MeshInstance3D" parent="StartRoom/Floors/Floor3"]
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_wduqw")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Floors/Floor3"]
+shape = SubResource("BoxShape3D_c6kux")
+
+[node name="Floor4" type="StaticBody3D" parent="StartRoom/Floors"]
+transform = Transform3D(0.477132, 0.317514, 0, -0.123173, 1.22995, 0, 0, 0, 0.486139, 39.3683, -1.275, 9.55806)
+collision_mask = 65535
+
+[node name="Floor" type="MeshInstance3D" parent="StartRoom/Floors/Floor4"]
+transform = Transform3D(20, -2.98023e-08, 0, 2.38419e-07, 0.4, 0, 0, 0, 20, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_a4yux")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Floors/Floor4"]
+shape = SubResource("BoxShape3D_c6kux")
+
+[node name="Floor" type="StaticBody3D" parent="StartRoom/Floors"]
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, 19.9565, 0, 0)
+collision_mask = 65535
+
+[node name="Floor2" type="MeshInstance3D" parent="StartRoom/Floors/Floor"]
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_h4l5o")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Floors/Floor"]
+shape = SubResource("BoxShape3D_mjlvj")
+
+[node name="Decoration" type="Node3D" parent="StartRoom"]
+
+[node name="Pipe" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(-1.27688e-08, 5.95247, -6.63322e-16, -0.0588131, -5.23852e-08, 0.286135, 0.286135, 2.54862e-07, 0.0588131, 3.79365, 0.655683, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_5y8ko")
+skeleton = NodePath("../../..")
+
+[node name="Pipe2" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(-1.27688e-08, 5.95247, -6.63322e-16, -0.0588131, -5.23852e-08, 0.286135, 0.286135, 2.54862e-07, 0.0588131, 3.43819, 1.07525, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_5y8ko")
+skeleton = NodePath("../../..")
+
+[node name="Pipe5" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(-1.27688e-08, 5.95247, -6.63322e-16, -0.0588131, -5.23852e-08, 0.286135, 0.286135, 2.54862e-07, 0.0588131, -8.10728, 0.655683, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_5y8ko")
+skeleton = NodePath("../../..")
+
+[node name="Pipe6" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(-1.27688e-08, 5.95247, -6.63322e-16, -0.0588131, -5.23852e-08, 0.286135, 0.286135, 2.54862e-07, 0.0588131, -8.46274, 1.07525, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_5y8ko")
+skeleton = NodePath("../../..")
+
+[node name="Pipe3" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(0.0588131, -2.07805e-07, -0.286135, -1.0198e-08, 5.95247, -1.25073e-08, 0.286135, 2.54862e-07, 0.0588131, 9.38539, 6.87147, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_rb3lk")
+skeleton = NodePath("../../..")
+
+[node name="Pipe4" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(0.0588131, -2.07805e-07, -0.286135, -1.0198e-08, 5.95247, -1.25073e-08, 0.286135, 2.54862e-07, 0.0588131, 9.74331, 6.46032, -9.70589)
+gi_lightmap_scale = 1
+mesh = SubResource("CylinderMesh_rb3lk")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StartRoom/Decoration"]
+collision_mask = 65535
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Decoration/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 0.739618, -10.036)
+shape = SubResource("BoxShape3D_t77pk")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StartRoom/Decoration/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 9.70867, 7.25082, -10.036)
+shape = SubResource("BoxShape3D_t77pk")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(0.3, 0, 0, 0, 4.98422, 0, 0, 0, 0.3, 9.9462, 1.52834, -3.41303)
+mesh = SubResource("BoxMesh_hfrox")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(0.3, 0, 0, 0, 4.98422, 0, 0, 0, 0.3, 9.9462, 1.52834, -6.4253)
+mesh = SubResource("BoxMesh_7p1x7")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="StartRoom/Decoration"]
+transform = Transform3D(0.3, 0, 0, 0, -1.36019e-07, -0.3, 0, 3.11176, -1.31134e-08, 9.94698, 3.87309, -5.01753)
+mesh = SubResource("BoxMesh_fvga8")
+skeleton = NodePath("../../..")
+
+[node name="Walls" type="Node3D" parent="StartRoom"]
+
+[node name="Wall" type="StaticBody3D" parent="StartRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.96495, 1.80199, 6.68644)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls/Wall"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls/Wall"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall5" type="StaticBody3D" parent="StartRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.96495, 1.90876, -16.4843)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls/Wall5"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls/Wall5"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall8" type="StaticBody3D" parent="StartRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.96495, 6.53082, -4.86363)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls/Wall8"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, -0.001, 0, 8.501)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls/Wall8"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall2" type="StaticBody3D" parent="StartRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.85047, 1.80199, 0.042356)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls/Wall2"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls/Wall2"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall3" type="StaticBody3D" parent="StartRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.048089, 1.80199, 9.87646)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls/Wall3"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls/Wall3"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall4" type="StaticBody3D" parent="StartRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.048089, 1.9325, -9.94015)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls/Wall4"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls/Wall4"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="FloatingDust" type="GPUParticles3D" parent="StartRoom"]
+transform = Transform3D(2.47381, 0, 0, 0, 0.625993, 0, 0, 0, 2.49812, 0.0160398, 2.80911, -0.0909243)
+cast_shadow = 0
+amount = 100
+lifetime = 9.83
+preprocess = 10.0
+randomness = 1.0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_b1nw8")
+draw_pass_1 = SubResource("QuadMesh_okbpn")
+
+[node name="LightDust" type="GPUParticles3D" parent="StartRoom"]
+transform = Transform3D(2.47381, 0, 0, 0, 0.625993, 0, 0, 0, 2.49812, 0.0160398, 4.22763, -0.0909243)
+cast_shadow = 0
+amount = 20
+lifetime = 9.83
+preprocess = 3.0
+explosiveness = 0.1
+randomness = 1.0
+visibility_aabb = AABB(-0.824, -7.01, -0.72, 1.648, 7.66, 1.44)
+process_material = SubResource("ParticleProcessMaterial_p2l2e")
+draw_pass_1 = SubResource("QuadMesh_okbpn")
+
+[node name="Walls2" type="Node3D" parent="StartRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.934499, 0)
+
+[node name="Wall6" type="StaticBody3D" parent="StartRoom/Walls2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.9974, 2.73649, -6.38655)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls2/Wall6"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 24.7856, 0, 0, 2.46501)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls2/Wall6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.6983)
+shape = SubResource("BoxShape3D_1vl5o")
+
+[node name="Wall7" type="StaticBody3D" parent="StartRoom/Walls2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.9974, 2.73649, -3.41014)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="StartRoom/Walls2/Wall7"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Walls2/Wall7"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Roof2" type="StaticBody3D" parent="StartRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0752, 3.97153, -4.89381)
+
+[node name="Roof2" type="MeshInstance3D" parent="StartRoom/Roof2"]
+transform = Transform3D(31.5896, 0, 0, 0, 0.4, 0, 0, 0, 24.483, 5.66278, 0, 7.15308)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_6152e")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartRoom/Roof2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.54983, 0, 0)
+shape = SubResource("BoxShape3D_a78wc")
+
+[node name="Roof" type="MeshInstance3D" parent="StartRoom/Roof2"]
+transform = Transform3D(20, 0, 0, 0, 0.4, 0, 0, 0, 20, -20.0752, 0.5893, 4.89381)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_6152e")
+skeleton = NodePath("../../..")
+
+[node name="Lightmap" type="LightmapGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036328, 4.42513, 0)
+quality = 2
+bounces = 5
+interior = true
+environment_mode = 0
+generate_probes_subdiv = 3
+light_data = ExtResource("11_x2sp8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lightmap"]
+libraries = {
+"": SubResource("AnimationLibrary_sl3u0")
+}
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_24syo")
+
+[node name="CombatRoom" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.8923, 1.90735e-06, 4.62206)
+
+[node name="Floors" type="Node3D" parent="NavigationRegion3D/CombatRoom"]
+
+[node name="Floor2" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Floors"]
+transform = Transform3D(30.7481, 0, 0, 0, 0.4, 0, 0, 0, 48.012, 11.0848, -2.25637, -15.2046)
+collision_mask = 65535
+
+[node name="Floor2" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Floors/Floor2"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, -0.0200001, 0.091, -0.00199999)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_tcmkg")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Floors/Floor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0196396, 0.152214, 0)
+shape = SubResource("BoxShape3D_mjlvj")
+
+[node name="Walls" type="Node3D" parent="NavigationRegion3D/CombatRoom"]
+
+[node name="Wall6" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1981, 1.80199, -1.58624)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall6"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.60332)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall12" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 0.57739, 0, 1, 0, -1, 0, -2.52385e-08, -5.78541, 1.80199, 0.61832)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall12"]
+transform = Transform3D(0.200109, 0, -1.7053e-13, 0, 5.41232, 0, 0, 0, 11.772, 0.0215459, -0.587366, -3.60786)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall12"]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 0, 0, 1, 2.86102e-06, -0.784478, -3.65591)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall11" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.10878, -16.037, 1.80199, 3.75424)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall11"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 15.1986, 0.101036, 0, -2.9501)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.668252)
+shape = SubResource("BoxShape3D_mvchf")
+
+[node name="Wall7" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 5.92695, 0, 0, 0, 2.49775, 25.7061, 13.6664, -15.5846)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall7"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall7"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall8" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(1, 0, 0, 0, 5.92695, 0, 0, 0, 2.49775, -4.55625, 13.6664, -24.3352)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall8"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall8"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall14" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 5.92695, 0, -1, -2.59075e-07, 0, 0, 0, 2.49775, 10.2572, 26.142, -13.4487)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall14"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_b7t7o")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall14"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall9" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -2.49775, 0, 5.92695, 0, 1, 0, -1.0918e-07, 9.52858, 13.6664, -38.1747)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall9"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall9"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall10" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -2.49775, 0, 5.92695, 0, 1, 0, -1.0918e-07, 8.65377, 13.6664, 8.45017)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall10"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 20.1285, 0, 0, 0)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_vnv2t")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall10"]
+shape = SubResource("BoxShape3D_doycc")
+
+[node name="Wall17" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 0.453805, 0, 0.904358, 0, -1, 0, -1.98364e-08, 5.70029, 0.299705, -3.6577)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall17"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall18" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 0.453805, 0, 0.904358, 0, -1, 0, -1.98364e-08, -0.192017, 0.299705, -14.2776)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall18"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall19" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 0.453805, 0, 0.904358, 0, -1, 0, -1.98364e-08, 5.5993, 0.299705, -25.2907)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall19"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall20" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(1.31134e-07, 0, -0.453805, 0, 0.904358, 0, 1, 0, 5.95093e-08, 16.0669, 0.299705, -24.9976)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall20"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall23" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-1, 0, -1.09854e-07, 0, 5.66377, 0, 8.74228e-08, 0, -1.25659, 6.77177, 11.6869, -18.5588)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall23"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall24" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(-1, 0, -1.09854e-07, 0, 5.66377, 0, 8.74228e-08, 0, -1.25659, 14.9411, 11.6869, -18.5588)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall24"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall21" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(1.31134e-07, 0, -0.453805, 0, 0.904358, 0, 1, 0, 5.95093e-08, 21.9592, 0.299705, -14.3778)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall21"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall22" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Walls"]
+transform = Transform3D(1.31134e-07, 0, -0.453805, 0, 0.904358, 0, 1, 0, 5.95093e-08, 16.1679, 0.299705, -3.36465)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall22"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Walls/Wall22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Enemies" type="Node3D" parent="NavigationRegion3D/CombatRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25808, -1.90735e-06, -4.62206)
+
+[node name="GunEnemy" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("12_qjmn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.329811, 0, 2.5587)
+
+[node name="GunEnemy2" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("12_qjmn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39497, 0, 2.43576)
+
+[node name="GunEnemy3" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("12_qjmn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.277485, 0, -1.85117)
+
+[node name="BigEnemy" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("16_iwht5")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.72306, 0, 0.57532)
+
+[node name="GunEnemy4" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("12_qjmn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.329811, 0, -18.5738)
+
+[node name="GunEnemy5" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("12_qjmn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39497, 0, -18.6968)
+
+[node name="GunEnemy6" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("12_qjmn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.277485, 0, -22.9837)
+
+[node name="BigEnemy2" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("16_iwht5")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.72306, 0, -20.5572)
+
+[node name="MeleeEnemy" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("15_e5lm8")]
+
+[node name="MeleeEnemy2" parent="NavigationRegion3D/CombatRoom/Enemies" instance=ExtResource("15_e5lm8")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 4.03424, 0, -1.2555)
+
+[node name="Lights" type="Node3D" parent="NavigationRegion3D/CombatRoom"]
+
+[node name="MainLight2" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Lights"]
+transform = Transform3D(-0.65911, 0.752047, 3.2873e-08, 0, -4.37114e-08, 1, 0.752047, 0.65911, 2.88106e-08, -13.7973, 3.57171, -9.36027)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 12.599
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Lights/MainLight2"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NavigationRegion3D/CombatRoom/Lights/MainLight2"]
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_87cno")
+}
+
+[node name="Combatlights" type="Node3D" parent="NavigationRegion3D/CombatRoom"]
+
+[node name="MainLight3" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, -4.30501, 4.81293, 4.42411)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight3"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight11" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(0.752047, 0.65911, 7.2522e-08, -0.65911, 0.752047, -1.08384e-08, -6.16836e-08, -3.9649e-08, 1, 11.0599, 3.52572, -8.02279)
+light_energy = 3.0
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 15.0
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight11"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight12" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(-0.752047, -0.65911, -1.59945e-07, -0.65911, 0.752047, -1.08384e-08, 1.2743e-07, 9.72702e-08, -1, 10.6215, 3.52572, -20.9397)
+light_energy = 3.0
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 15.0
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight12"]
+transform = Transform3D(2.10958, 2.61485e-14, -5.68434e-14, 2.61485e-14, 2.10958, 4.26326e-14, -5.68434e-14, 7.10543e-14, 2.10958, 0, 0, -0.00594139)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight4" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, -4.30501, 4.81293, -11.232)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight4"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight5" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, -4.30501, 4.81293, -23.2259)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight5"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight6" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, -4.30501, 4.81293, -35.0583)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight6"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight7" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, 25.4499, 4.81293, 4.42411)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight7"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight8" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, 25.4499, 4.81293, -11.232)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight8"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight9" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, 25.4499, 4.81293, -23.2259)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight9"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="MainLight10" type="OmniLight3D" parent="NavigationRegion3D/CombatRoom/Combatlights"]
+transform = Transform3D(2.88106e-08, 1.08384e-08, -1, -0.65911, 0.752047, -1.08384e-08, 0.752047, 0.65911, 2.88106e-08, 25.4499, 4.81293, -35.0583)
+light_energy = 1.515
+light_projector = ExtResource("4_y7rhb")
+light_size = 0.162
+light_specular = 7.288
+shadow_enabled = true
+omni_range = 11.639
+omni_attenuation = 1.36604
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="NavigationRegion3D/CombatRoom/Combatlights/MainLight10"]
+transform = Transform3D(2.10958, 0, 0, 0, 2.10958, -7.10543e-15, 0, 7.10543e-15, 2.10958, 0, 0, 0.0384402)
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_as0yh")
+frame = 1
+frame_progress = 0.383661
+
+[node name="Pillars" type="Node3D" parent="NavigationRegion3D/CombatRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4707, -9.53674e-07, -15.7519)
+
+[node name="Pillar 1" type="Node3D" parent="NavigationRegion3D/CombatRoom/Pillars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.13063, 0, 4.8486)
+
+[node name="Wall13" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1"]
+transform = Transform3D(1, 0, 0, 0, 6.34676, 0, 0, 0, 0.683952, -0.56295, 11.5287, 9.50778)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall13"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall14" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1"]
+transform = Transform3D(1, 0, 0, 0, 6.34676, 0, 0, 0, 0.683952, 7.60072, 11.5287, 9.50778)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall14"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall15" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1"]
+transform = Transform3D(-4.37114e-08, 0, -0.683952, 0, 6.34676, 0, 1, 0, -2.98965e-08, 0.97728, 11.5287, 10.8688)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall15"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall16" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1"]
+transform = Transform3D(-4.37114e-08, 0, -0.683952, 0, 6.34676, 0, 1, 0, -2.98965e-08, 0.97728, 11.5287, 3.16975)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall16"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1/Wall16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 1"]
+libraries = {
+"": SubResource("AnimationLibrary_cbu4m")
+}
+
+[node name="Pillar 2" type="Node3D" parent="NavigationRegion3D/CombatRoom/Pillars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.13063, 0, -16.396)
+
+[node name="Wall13" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2"]
+transform = Transform3D(1, 0, 0, 0, 6.34676, 0, 0, 0, 0.683952, -0.56295, 11.5287, 9.50778)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall13"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall14" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2"]
+transform = Transform3D(1, 0, 0, 0, 6.34676, 0, 0, 0, 0.683952, 7.60072, 11.5287, 9.50778)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall14"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall15" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2"]
+transform = Transform3D(-4.37114e-08, 0, -0.683952, 0, 6.34676, 0, 1, 0, -2.98965e-08, 0.97728, 11.5287, 10.8688)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall15"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="Wall16" type="StaticBody3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2"]
+transform = Transform3D(-4.37114e-08, 0, -0.683952, 0, 6.34676, 0, 1, 0, -2.98965e-08, 0.97728, 11.5287, 3.16975)
+collision_mask = 65535
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall16"]
+transform = Transform3D(0.200109, 0, 0, 0, 5.41232, 0, 0, 0, 11.772, 0, 0, -3.58349)
+gi_lightmap_scale = 1
+mesh = SubResource("BoxMesh_bmo8r")
+skeleton = NodePath("../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2/Wall16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.58898)
+shape = SubResource("BoxShape3D_qva6q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NavigationRegion3D/CombatRoom/Pillars/Pillar 2"]
+libraries = {
+"": SubResource("AnimationLibrary_cbu4m")
+}
+
+[node name="FloatingDust2" type="GPUParticles3D" parent="NavigationRegion3D/CombatRoom"]
+transform = Transform3D(2.47381, 0, 0, 0, 0.625993, 0, 0, 0, 2.49812, 9.65584, 15.5103, -15.2503)
+cast_shadow = 0
+amount = 10000
+lifetime = 9.83
+preprocess = 10.0
+randomness = 1.0
+interpolate = false
+visibility_aabb = AABB(-6.95306, -27.9724, -9.01283, 13.9061, 36.4621, 18.0257)
+process_material = SubResource("ParticleProcessMaterial_wtqpm")
+draw_pass_1 = SubResource("QuadMesh_ntwc7")
+
+[connection signal="body_entered" from="CloseDoor/Area3D" to="CloseDoor/Area3D" method="_on_body_entered"]

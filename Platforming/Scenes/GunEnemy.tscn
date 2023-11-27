@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn7gjhqnf36pa"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_j685w"]
+[ext_resource type="Texture2D" uid="uid://bvrqprsbagjvq" path="res://Textures/Pipe.png" id="2_ursjn"]
+[ext_resource type="Script" path="res://Scripts/EnemyHead.gd" id="3_1rnph"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_khhr2"]
+radius = 0.55
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0pxal"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c36bv"]
+shading_mode = 0
+albedo_color = Color(0.360784, 0.360784, 0.360784, 1)
+albedo_texture = ExtResource("2_ursjn")
+texture_filter = 0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rq2wo"]
+lightmap_size_hint = Vector2i(17, 14)
+material = SubResource("StandardMaterial3D_c36bv")
+
+[node name="GunEnemy" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 5
+wall_min_slide_angle = 0.0
+script = ExtResource("1_j685w")
+
+[node name="Hitbox" type="Area3D" parent="." groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 260
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_khhr2")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0pxal")
+
+[node name="Capsule" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_rq2wo")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("3_1rnph")
+
+[node name="ShootPlayerCheck" type="RayCast3D" parent="Head"]
+transform = Transform3D(-2.07629e-08, 0, 0.475, 0, 0.475, 0, -0.475, 0, -2.07629e-08, 0, 0, 0)
+target_position = Vector3(145.735, -1, 0)
+collision_mask = 5
+collide_with_areas = true
+
+[node name="BulletSpawn" type="Marker3D" parent="Head/ShootPlayerCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40796, 0, 6.15439e-08)
+
+[node name="PlayerCheck" type="RayCast3D" parent="Head"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(64.9, -1, 0)
+collision_mask = 5
+collide_with_areas = true
+
+[node name="Shoot" type="Timer" parent="Head"]
+
+[node name="Navigation" type="Node3D" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Navigation"]
+path_max_distance = 20.01
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 1.0
+max_speed = 5.0
+avoidance_layers = 8
+avoidance_mask = 65535
+
+[connection signal="timeout" from="Head/Shoot" to="." method="_on_shoot_timeout"]
+[connection signal="velocity_computed" from="Navigation/NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
